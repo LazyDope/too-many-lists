@@ -1,5 +1,3 @@
-use std::mem;
-
 pub struct IntoIter<T>(List<T>);
 
 pub struct Iter<'a, T> {
@@ -29,7 +27,7 @@ impl<T> List<T> {
     pub fn push(&mut self, elem: T) {
         self.head = Some(Box::new(Node {
             elem,
-            next: mem::replace(&mut self.head, None),
+            next: self.head.take(),
         }));
     }
 
